@@ -121,7 +121,7 @@ namespace Homework9 {
 
         private void GraphDragSource_MouseDown(object sender, System.Windows.Forms.MouseEventArgs e)
         {
-            GameProgressControl gpc = (GameProgressControl)sender;
+            GraphGameProgressControl gpc = (GraphGameProgressControl)sender;
             Bitmap bmp = new Bitmap(gpc.Chart.Width, gpc.Chart.Height);
             gpc.DrawToBitmap(bmp, new Rectangle(0, 0, gpc.Chart.Width, gpc.Chart.Height));
             gpc.DoDragDrop(bmp, DragDropEffects.Copy);
