@@ -10,6 +10,7 @@ namespace Homework9.Domain
 {
     public class SnakeGame : IDisposable
     {
+        public int Score => Snake.Length;
         private Snake Snake;
         private Timer MoveTimer;
         private Timer AppleTimer;
@@ -24,7 +25,7 @@ namespace Homework9.Domain
             MoveTimer.Enabled = true;
 
             AppleTimer = new Timer();
-           // AppleTimer = 
+            //AppleTimer = 
         }
 
         private void MoveTimer_Elapsed(object sender, ElapsedEventArgs e)
