@@ -28,12 +28,12 @@
             this.newGameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pauseGameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.printScoreToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.panel1 = new System.Windows.Forms.Panel();
             this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
             this.graphGameProgressControl = new Homework9.GraphGameProgressControl();
             this.gridGameProgressControl = new Homework9.UserControls.GridGameProgressControl();
-            this.printScoreToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -67,6 +67,13 @@
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
             this.saveToolStripMenuItem.Size = new System.Drawing.Size(77, 20);
             this.saveToolStripMenuItem.Text = "Save Game";
+            // 
+            // printScoreToolStripMenuItem
+            // 
+            this.printScoreToolStripMenuItem.Name = "printScoreToolStripMenuItem";
+            this.printScoreToolStripMenuItem.Size = new System.Drawing.Size(76, 20);
+            this.printScoreToolStripMenuItem.Text = "Print Score";
+            this.printScoreToolStripMenuItem.Click += new System.EventHandler(this.printScoreToolStripMenuItem_Click);
             // 
             // statusStrip1
             // 
@@ -102,13 +109,6 @@
             this.gridGameProgressControl.Name = "gridGameProgressControl";
             this.gridGameProgressControl.Size = new System.Drawing.Size(692, 193);
             this.gridGameProgressControl.TabIndex = 4;
-            // 
-            // printScoreToolStripMenuItem
-            // 
-            this.printScoreToolStripMenuItem.Name = "printScoreToolStripMenuItem";
-            this.printScoreToolStripMenuItem.Size = new System.Drawing.Size(76, 20);
-            this.printScoreToolStripMenuItem.Text = "Print Score";
-            this.printScoreToolStripMenuItem.Click += new System.EventHandler(this.printScoreToolStripMenuItem_Click);
             // 
             // MainForm
             // 

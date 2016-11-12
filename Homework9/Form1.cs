@@ -66,7 +66,7 @@ namespace Homework9 {
 
         private void printScoreToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Printer p = new Printer(gameProgressControl.Chart);
+            Printer p = new Printer(graphGameProgressControl.Chart);
             p.ShowDialog();
         }
     }

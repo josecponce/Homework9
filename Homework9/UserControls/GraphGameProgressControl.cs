@@ -16,6 +16,7 @@ namespace Homework9
 {
     public partial class GraphGameProgressControl : UserControl
     {
+        public Chart Chart => GameProgressChart;
         public GraphGameProgressControl()
         {
             InitializeComponent();
