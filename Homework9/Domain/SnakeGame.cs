@@ -19,12 +19,12 @@ namespace Homework9.Domain
             Snake = new Snake(new Point(0,0), Direction.Right);
 
             MoveTimer = new Timer();
-            MoveTimer.Elapsed += MoveNow;
+            //MoveTimer.Elapsed += MoveNow;
             MoveTimer.Interval = 500;
             MoveTimer.Enabled = true;
 
             AppleTimer = new Timer();
-            AppleTimer = 
+           // AppleTimer = 
         }
 
         private void MoveTimer_Elapsed(object sender, ElapsedEventArgs e)
