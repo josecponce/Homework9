@@ -39,14 +39,18 @@ namespace Homework9 {
                 this.Hide();
                 open = false;
             }
-            else {
+            else
+            {
                 this.Show();
                 this.WindowState = FormWindowState.Normal;
                 open = true;
             }
+        }
 
-           
-          
+        private void highScoreToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Forms.UserInfo uf = new Forms.UserInfo();
+            uf.Show();
         }
     }
 }

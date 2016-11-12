@@ -32,6 +32,7 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
+            this.highScoreToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -40,7 +41,8 @@
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.newGameToolStripMenuItem,
             this.pauseGameToolStripMenuItem,
-            this.saveToolStripMenuItem});
+            this.saveToolStripMenuItem,
+            this.highScoreToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(717, 24);
@@ -93,6 +95,13 @@
             this.notifyIcon.Visible = true;
             this.notifyIcon.MouseClick += new System.Windows.Forms.MouseEventHandler(this.notifyIcon_MouseClick);
             // 
+            // highScoreToolStripMenuItem
+            // 
+            this.highScoreToolStripMenuItem.Name = "highScoreToolStripMenuItem";
+            this.highScoreToolStripMenuItem.Size = new System.Drawing.Size(77, 20);
+            this.highScoreToolStripMenuItem.Text = "High Score";
+            this.highScoreToolStripMenuItem.Click += new System.EventHandler(this.highScoreToolStripMenuItem_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -123,6 +132,7 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.NotifyIcon notifyIcon;
+        private System.Windows.Forms.ToolStripMenuItem highScoreToolStripMenuItem;
     }
 }
 
