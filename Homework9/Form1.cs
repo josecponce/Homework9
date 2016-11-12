@@ -10,11 +10,14 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Homework9 {
-    public partial class MainForm : Form {
+    public partial class MainForm : Form
+    {
 
         private SnakeGame Game;
+        private Rectangle dragBoxFromMouseDown;
 
-        public MainForm() {
+        public MainForm()
+        {
             InitializeComponent();
             Game = new SnakeGame();
             this.notifyIcon.Icon = Properties.Resources.snakeIcon;
@@ -34,7 +37,7 @@ namespace Homework9 {
             }
         }
 
-        
+
         private void notifyIcon_MouseClick(object sender, MouseEventArgs e)
         {
 
@@ -43,20 +46,42 @@ namespace Homework9 {
                 this.Hide();
                 open = false;
             }
-            else {
+            else
+            {
                 this.Show();
                 this.WindowState = FormWindowState.Normal;
                 open = true;
             }
 
-           
-          
         }
 
         private void printScoreToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Printer p = new Printer(gameProgressControl.Chart);
             p.ShowDialog();
+        }
+
+        private void GraphDragSource_MouseDown(object sender, System.Windows.Forms.MouseEventArgs e)
+        {
+            GameProgressControl gpc = (GameProgressControl)sender;
+            Bitmap bmp = new Bitmap(gpc.Chart.Width, gpc.Chart.Height);
+            gpc.DrawToBitmap(bmp, new Rectangle(0, 0, gpc.Chart.Width, gpc.Chart.Height));
+            gpc.DoDragDrop(bmp, DragDropEffects.Copy);
+            
+
+
+            // Remember the point where the mouse down occurred. The DragSize indicates
+            // the size that the mouse can move before a drag event should be started.                
+            Size dragSize = SystemInformation.DragSize;           
+
+        }
+
+        private void GraphDragSource_DragEnter(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(typeof(Bitmap)))
+                e.Effect = DragDropEffects.Copy;
+            else
+                e.Effect = DragDropEffects.None;
         }
     }
 }
