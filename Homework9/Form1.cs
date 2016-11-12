@@ -1,4 +1,5 @@
 ﻿using Homework9.Domain;
+using Homework9.UserControls;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,31 +10,72 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Homework9
-{
-    public partial class Form1 : Form
-    {
+namespace Homework9 {
+    public partial class MainForm : Form {
 
-
+        private SnakeGame Game;
+        private GameProgressWatcher Watcher;
         private System.Timers.Timer timer;
-        private SnakeGame game;
-        public Form1()
-        {
 
+        public MainForm() {
             InitializeComponent();
-            game = new SnakeGame();
-            game.addApple();
-            game.initGame();
+            Game = new SnakeGame();
+            this.notifyIcon.Icon = Properties.Resources.snakeIcon;
+            Game = new SnakeGame();
+            Game.addApple();
+            Game.initGame();
             timer = new System.Timers.Timer();
             timer.Interval = 1000;
             timer.Elapsed += Timer_Elapsed;
             timer.Enabled = true;
         }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            Watcher = new GameProgressWatcher(Game, this);
+            Watcher.NewData += graphGameProgressControl.UpdateGraph;
+            Watcher.NewData += gridGameProgressControl.UpdateGraph;
+            Watcher.Start();
+        }
+
+        bool open = true;
+        private void Form_Resize(object sender, MouseEventArgs e)
+        {
+            if (WindowState == FormWindowState.Minimized)
+            {
+                this.Hide();
+                open = false;
+            }
+        }
+
+        
+        private void notifyIcon_MouseClick(object sender, MouseEventArgs e)
+        {
+
+            if (open == true)
+            {
+                this.Hide();
+                open = false;
+            }
+            else {
+                this.Show();
+                this.WindowState = FormWindowState.Normal;
+                open = true;
+            }
+
+           
+          
+        }
+
+        private void gridGameProgressControl_Load(object sender, EventArgs e)
+        {
+
+        }
+
         private delegate void Mydel();
         private void Timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
-            game.move();
+            Game.move();
             this.Invoke(new Mydel(Del));
         }
         public void Del()
@@ -42,7 +84,7 @@ namespace Homework9
         }
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
-            game.doDrawing(e.Graphics);
+            Game.doDrawing(e.Graphics);
 
         }
 
@@ -50,21 +92,27 @@ namespace Homework9
         {
 
             if (e.KeyCode == Keys.Up)
-                game.setDirection(0);
+                Game.setDirection(0);
 
             if (e.KeyCode == Keys.Right)
-                game.setDirection(1);
+                Game.setDirection(1);
 
             if (e.KeyCode == Keys.Down)
-                game.setDirection(2);
+                Game.setDirection(2);
 
             if (e.KeyCode == Keys.Left)
-                game.setDirection(3);
+                Game.setDirection(3);
 
-            game.move();
+            Game.move();
             this.Refresh();
             //MessageBox.Show(game.SnakeDirection+" ");
 
+        }
+
+        private void printScoreToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Homework9.Printer p = new Homework9.Printer(graphGameProgressControl.Chart);
+            p.ShowDialog();
         }
     }
 }
