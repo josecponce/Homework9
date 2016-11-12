@@ -1,6 +1,6 @@
 ﻿namespace Homework9
 {
-    partial class GameProgressControl
+    partial class GraphGameProgressControl
     {
         /// <summary> 
         /// Required designer variable.

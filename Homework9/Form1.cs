@@ -1,4 +1,5 @@
 ﻿using Homework9.Domain;
+using Homework9.UserControls;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,6 +14,7 @@ namespace Homework9 {
     public partial class MainForm : Form {
 
         private SnakeGame Game;
+        private GameProgressWatcher Watcher;
 
         public MainForm() {
             InitializeComponent();
@@ -22,8 +24,12 @@ namespace Homework9 {
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            gameProgressControl.StartProgress(Game, this);
+            Watcher = new GameProgressWatcher(Game, this);
+            Watcher.NewData += graphGameProgressControl.UpdateGraph;
+            Watcher.NewData += gridGameProgressControl.UpdateGraph;
+            Watcher.Start();
         }
+
         bool open = true;
         private void Form_Resize(object sender, MouseEventArgs e)
         {
@@ -51,6 +57,11 @@ namespace Homework9 {
 
            
           
+        }
+
+        private void gridGameProgressControl_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

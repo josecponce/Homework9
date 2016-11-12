@@ -31,7 +31,8 @@
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.panel1 = new System.Windows.Forms.Panel();
             this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
-            this.gameProgressControl = new Homework9.GameProgressControl();
+            this.graphGameProgressControl = new Homework9.GraphGameProgressControl();
+            this.gridGameProgressControl = new Homework9.UserControls.GridGameProgressControl();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -86,22 +87,30 @@
             this.notifyIcon.Visible = true;
             this.notifyIcon.MouseClick += new System.Windows.Forms.MouseEventHandler(this.notifyIcon_MouseClick);
             // 
-            // gameProgressControl
+            // graphGameProgressControl
             // 
-            this.gameProgressControl.Location = new System.Drawing.Point(13, 292);
-            this.gameProgressControl.Name = "gameProgressControl";
-            this.gameProgressControl.Size = new System.Drawing.Size(692, 193);
-            this.gameProgressControl.TabIndex = 3;
+            this.graphGameProgressControl.Location = new System.Drawing.Point(13, 292);
+            this.graphGameProgressControl.Name = "graphGameProgressControl";
+            this.graphGameProgressControl.Size = new System.Drawing.Size(692, 193);
+            this.graphGameProgressControl.TabIndex = 3;
+            // 
+            // gridGameProgressControl
+            // 
+            this.gridGameProgressControl.Location = new System.Drawing.Point(13, 292);
+            this.gridGameProgressControl.Name = "gridGameProgressControl";
+            this.gridGameProgressControl.Size = new System.Drawing.Size(692, 193);
+            this.gridGameProgressControl.TabIndex = 4;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(732, 524);
-            this.Controls.Add(this.gameProgressControl);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.menuStrip1);
+            this.Controls.Add(this.gridGameProgressControl);
+            this.Controls.Add(this.graphGameProgressControl);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "MainForm";
             this.Text = "Snake Game";
@@ -122,7 +131,8 @@
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.NotifyIcon notifyIcon;
-        private GameProgressControl gameProgressControl;
+        private GraphGameProgressControl graphGameProgressControl;
+        private UserControls.GridGameProgressControl gridGameProgressControl;
     }
 }
 
