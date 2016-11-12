@@ -25,7 +25,7 @@ namespace Homework9
             pd.PrintPage += new PrintPageEventHandler(pd_PrintPage);
 
 
-        }  
+        }
 
         private void pd_PrintPage(object sender, PrintPageEventArgs ev)
         {
@@ -39,8 +39,9 @@ namespace Homework9
                 // Draw a line of text, followed by the chart 
                 ev.Graphics.DrawString("Line before chart", printFont, Brushes.Black, 10, 10);
                 chart.Printing.PrintPaint(ev.Graphics, myRec);
-              
-            } catch (Exception e)
+
+            }
+            catch (Exception e)
             { Console.WriteLine(e.Message); }
         }
 
@@ -48,17 +49,6 @@ namespace Homework9
         {
             printPreviewDialog.ShowDialog();
         }
-
-
-
-
-
-
-
-
-
-
-
-
     }
 }
+
