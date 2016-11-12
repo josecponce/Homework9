@@ -8,23 +8,45 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Homework9
-{
-    public partial class Form1 : Form
-    {
-
-        public Form1()
-        {
+namespace Homework9 {
+    public partial class MainForm : Form {
+        public MainForm() {
             InitializeComponent();
-            this.DoubleBuffered = true;
+            
+            this.notifyIcon.Icon = Properties.Resources.snakeIcon;
         }
-
-
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            gameProgressControl.StartProgress(new Domain.SnakeGame(), this);
+            
+        }
+        bool open = true;
+        private void Form_Resize(object sender, MouseEventArgs e)
+        {
+            if (WindowState == FormWindowState.Minimized)
+            {
+                this.Hide();
+                open = false;
+            }
         }
 
+        
+        private void notifyIcon_MouseClick(object sender, MouseEventArgs e)
+        {
+
+            if (open == true)
+            {
+                this.Hide();
+                open = false;
+            }
+            else {
+                this.Show();
+                this.WindowState = FormWindowState.Normal;
+                open = true;
+            }
+
+           
+          
+        }
     }
 }
