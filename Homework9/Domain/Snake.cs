@@ -16,7 +16,7 @@ namespace Homework9.Domain
     }
     public class Snake
     {
-        private int Length;
+        public int Length { get; private set; }
         private List<Point> Turns;
         private Direction Direction;
         private Point Position;

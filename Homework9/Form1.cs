@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Homework9.Domain;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -10,15 +11,18 @@ using System.Windows.Forms;
 
 namespace Homework9 {
     public partial class MainForm : Form {
+
+        private SnakeGame Game;
+
         public MainForm() {
             InitializeComponent();
-            
+            Game = new SnakeGame();
             this.notifyIcon.Icon = Properties.Resources.snakeIcon;
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            
+            gameProgressControl.StartProgress(Game, this);
         }
         bool open = true;
         private void Form_Resize(object sender, MouseEventArgs e)
@@ -51,6 +55,12 @@ namespace Homework9 {
         {
             Forms.UserInfo uf = new Forms.UserInfo();
             uf.Show();
+        }
+
+        private void printScoreToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Printer p = new Printer(gameProgressControl.Chart);
+            p.ShowDialog();
         }
     }
 }
