@@ -10,6 +10,7 @@ namespace Homework9.Domain
 {
     public class SnakeGame : IDisposable
     {
+        public int Score => Snake.Length;
         private Snake Snake;
         private Timer MoveTimer;
         private Timer AppleTimer;
