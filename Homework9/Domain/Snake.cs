@@ -9,23 +9,26 @@ namespace Homework9.Domain
 {
     public enum Direction
     {
-        Left,
-        Right,
+               
         Up,
-        Down
+        Right,
+        Down,
+        Left
     }
     public class Snake
     {
-        private int Length;
-        private List<Point> Turns;
-        private Direction Direction;
+        public int Length { get;  set; }
+        public List<Point> location { get;  set; }
+        
+        public Direction Direction { get; set; }
         private Point Position;
 
         public Snake(Point startingPosition, Direction startingDirection)
         {
             Position = startingPosition;
             Direction = startingDirection;
-            Turns = new List<Point>();
+            location = new List<Point>();
+           
             Length = 1;
         }
 
