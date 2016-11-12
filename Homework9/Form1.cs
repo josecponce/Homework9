@@ -56,11 +56,5 @@ namespace Homework9 {
             Forms.UserInfo uf = new Forms.UserInfo();
             uf.Show();
         }
-
-        private void printScoreToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Printer p = new Printer(gameProgressControl.Chart);
-            p.ShowDialog();
-        }
     }
 }

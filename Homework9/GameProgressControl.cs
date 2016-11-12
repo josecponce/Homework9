@@ -15,7 +15,6 @@ namespace Homework9
 {
     public partial class GameProgressControl : UserControl
     {
-        public Chart Chart => GameProgressChart;
         private SnakeGame Game;
         private System.Timers.Timer Timer;
         private int time = 1;

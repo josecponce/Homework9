@@ -32,7 +32,6 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
             this.gameProgressControl = new Homework9.GameProgressControl();
-            this.printScoreToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -41,8 +40,7 @@
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.newGameToolStripMenuItem,
             this.pauseGameToolStripMenuItem,
-            this.saveToolStripMenuItem,
-            this.printScoreToolStripMenuItem});
+            this.saveToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(732, 24);
@@ -95,13 +93,6 @@
             this.gameProgressControl.Size = new System.Drawing.Size(692, 193);
             this.gameProgressControl.TabIndex = 3;
             // 
-            // printScoreToolStripMenuItem
-            // 
-            this.printScoreToolStripMenuItem.Name = "printScoreToolStripMenuItem";
-            this.printScoreToolStripMenuItem.Size = new System.Drawing.Size(76, 20);
-            this.printScoreToolStripMenuItem.Text = "Print Score";
-            this.printScoreToolStripMenuItem.Click += new System.EventHandler(this.printScoreToolStripMenuItem_Click);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -132,7 +123,6 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.NotifyIcon notifyIcon;
         private GameProgressControl gameProgressControl;
-        private System.Windows.Forms.ToolStripMenuItem printScoreToolStripMenuItem;
     }
 }
 
