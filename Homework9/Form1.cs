@@ -1,4 +1,5 @@
 ﻿using Homework9.Domain;
+using Homework9.UserControls;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,6 +15,8 @@ namespace Homework9 {
     {
 
         private SnakeGame Game;
+        private GameProgressWatcher Watcher;
+        private System.Timers.Timer timer;
         private Rectangle dragBoxFromMouseDown;
 
         public MainForm()
@@ -21,12 +24,23 @@ namespace Homework9 {
             InitializeComponent();
             Game = new SnakeGame();
             this.notifyIcon.Icon = Properties.Resources.snakeIcon;
+            Game = new SnakeGame();
+            Game.addApple();
+            Game.initGame();
+            timer = new System.Timers.Timer();
+            timer.Interval = 1000;
+            timer.Elapsed += Timer_Elapsed;
+            timer.Enabled = true;
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            gameProgressControl.StartProgress(Game, this);
+            Watcher = new GameProgressWatcher(Game, this);
+            Watcher.NewData += graphGameProgressControl.UpdateGraph;
+            Watcher.NewData += gridGameProgressControl.UpdateGraph;
+            Watcher.Start();
         }
+
         bool open = true;
         private void Form_Resize(object sender, MouseEventArgs e)
         {
@@ -53,11 +67,55 @@ namespace Homework9 {
                 open = true;
             }
 
+           
+          
+        }
+
+        private void gridGameProgressControl_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private delegate void Mydel();
+        private void Timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+        {
+            Game.move();
+            this.Invoke(new Mydel(Del));
+        }
+        public void Del()
+        {
+            this.Invalidate();
+        }
+        private void Form1_Paint(object sender, PaintEventArgs e)
+        {
+            Game.doDrawing(e.Graphics);
+
+        }
+
+        private void Form1_KeyDown(object sender, KeyEventArgs e)
+        {
+
+            if (e.KeyCode == Keys.Up)
+                Game.setDirection(0);
+
+            if (e.KeyCode == Keys.Right)
+                Game.setDirection(1);
+
+            if (e.KeyCode == Keys.Down)
+                Game.setDirection(2);
+
+            if (e.KeyCode == Keys.Left)
+                Game.setDirection(3);
+
+            Game.move();
+            this.Refresh();
+            //MessageBox.Show(game.SnakeDirection+" ");
+
         }
 
         private void printScoreToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Printer p = new Printer(gameProgressControl.Chart);
+            Homework9.Printer p = new Homework9.Printer(graphGameProgressControl.Chart);
             p.ShowDialog();
         }
 
