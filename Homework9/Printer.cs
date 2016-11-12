@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Drawing.Printing;
+using System.Windows.Forms.DataVisualization.Charting;
 
 
 namespace Homework9
@@ -35,9 +36,9 @@ namespace Homework9
                 // Draw a line of text, followed by the chart, and then another line of text 
                 ev.Graphics.DrawString("Line before chart", printFont, Brushes.Black, 10, 10);
                 chart.Printing.PrintPaint(ev.Graphics, myRec);
-                ev.Graphics.DrawString("Line after chart", printFont, Brushes.Black, 10, 200);
+              
             } catch (Exception e)
-            { }
+            { Console.WriteLine(e.Message); }
         }
 
 
