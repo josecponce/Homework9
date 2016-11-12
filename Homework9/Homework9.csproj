@@ -89,9 +89,6 @@
     <None Include="Resources\Icon1.ico" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\snakeIcon.ico" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\Image1.png" />
   </ItemGroup>
   <ItemGroup>
@@ -99,6 +96,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\snake.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\snakeIcon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

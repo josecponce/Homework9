@@ -13,26 +13,39 @@ namespace Homework9 {
         public MainForm() {
             InitializeComponent();
             
-            this.notifyIcon.Icon = Properties.Resources.Icon1;
+            this.notifyIcon.Icon = Properties.Resources.snakeIcon;
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
             
         }
+        bool open = true;
         private void Form_Resize(object sender, MouseEventArgs e)
         {
             if (WindowState == FormWindowState.Minimized)
             {
                 this.Hide();
+                open = false;
             }
         }
 
+        
         private void notifyIcon_MouseClick(object sender, MouseEventArgs e)
         {
+
+            if (open == true)
+            {
+                this.Hide();
+                open = false;
+            }
+            else {
+                this.Show();
+                this.WindowState = FormWindowState.Normal;
+                open = true;
+            }
+
            
-           this.Show();
-           this.WindowState = FormWindowState.Normal;
           
         }
     }
