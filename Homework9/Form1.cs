@@ -104,8 +104,9 @@ namespace Homework9 {
 
         private void printScoreToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Homework9.Printer p = new Homework9.Printer(graphGameProgressControl.Chart);
-            p.ShowDialog();
+            using (Homework9.Printer p = new Homework9.Printer(graphGameProgressControl.Chart)) {
+                p.ShowDialog();
+            }
         }
 
         private void GraphDragSource_MouseDown(object sender, System.Windows.Forms.MouseEventArgs e)
@@ -135,6 +136,13 @@ namespace Homework9 {
         {
             HighScore.UserInfo uf = new HighScore.UserInfo();
             uf.Show();
+        }
+
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e) {
+            timer.Enabled = false;
+            Watcher.Dispose();
+            timer.Dispose();
+            Game.Dispose();
         }
     }
 }

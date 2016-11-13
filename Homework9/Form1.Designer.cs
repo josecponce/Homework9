@@ -30,12 +30,12 @@
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.printScoreToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.highScoreToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.switchViewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.panel1 = new System.Windows.Forms.Panel();
             this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
             this.graphGameProgressControl = new Homework9.GraphGameProgressControl();
             this.gridGameProgressControl = new Homework9.UserControls.GridGameProgressControl();
-            this.switchViewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -88,6 +88,13 @@
             this.highScoreToolStripMenuItem.Text = "High Score";
             this.highScoreToolStripMenuItem.Click += new System.EventHandler(this.highScoreToolStripMenuItem_Click);
             // 
+            // switchViewToolStripMenuItem
+            // 
+            this.switchViewToolStripMenuItem.Name = "switchViewToolStripMenuItem";
+            this.switchViewToolStripMenuItem.Size = new System.Drawing.Size(100, 24);
+            this.switchViewToolStripMenuItem.Text = "Switch View";
+            this.switchViewToolStripMenuItem.Click += new System.EventHandler(this.switchViewToolStripMenuItem_Click);
+            // 
             // statusStrip1
             // 
             this.statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
@@ -101,7 +108,7 @@
             // panel1
             // 
             this.panel1.Location = new System.Drawing.Point(16, 33);
-            this.panel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(924, 318);
             this.panel1.TabIndex = 2;
@@ -115,7 +122,7 @@
             // graphGameProgressControl
             // 
             this.graphGameProgressControl.Location = new System.Drawing.Point(17, 359);
-            this.graphGameProgressControl.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.graphGameProgressControl.Margin = new System.Windows.Forms.Padding(5);
             this.graphGameProgressControl.Name = "graphGameProgressControl";
             this.graphGameProgressControl.Size = new System.Drawing.Size(923, 238);
             this.graphGameProgressControl.TabIndex = 3;
@@ -123,18 +130,11 @@
             // gridGameProgressControl
             // 
             this.gridGameProgressControl.Location = new System.Drawing.Point(17, 359);
-            this.gridGameProgressControl.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.gridGameProgressControl.Margin = new System.Windows.Forms.Padding(5);
             this.gridGameProgressControl.Name = "gridGameProgressControl";
             this.gridGameProgressControl.Size = new System.Drawing.Size(923, 238);
             this.gridGameProgressControl.TabIndex = 4;
             this.gridGameProgressControl.Visible = false;
-            // 
-            // switchViewToolStripMenuItem
-            // 
-            this.switchViewToolStripMenuItem.Name = "switchViewToolStripMenuItem";
-            this.switchViewToolStripMenuItem.Size = new System.Drawing.Size(100, 24);
-            this.switchViewToolStripMenuItem.Text = "Switch View";
-            this.switchViewToolStripMenuItem.Click += new System.EventHandler(this.switchViewToolStripMenuItem_Click);
             // 
             // MainForm
             // 
@@ -147,9 +147,10 @@
             this.Controls.Add(this.gridGameProgressControl);
             this.Controls.Add(this.graphGameProgressControl);
             this.MainMenuStrip = this.menuStrip1;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "MainForm";
             this.Text = "Snake Game";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();

@@ -51,6 +51,7 @@ namespace Homework9.Domain
 
         public void Dispose()
         {
+            MoveTimer.Enabled = false;
             MoveTimer?.Dispose();
         }
 

@@ -42,7 +42,7 @@ namespace Homework9.UserControls
             int score = Game.Score;
             int currentTime = time;
             Data.Add(new Point(time, score));
-            Owner.Invoke(new UpdateGraphDel(Update), new object[] { currentTime, score });
+            Owner?.Invoke(new UpdateGraphDel(Update), new object[] { currentTime, score });
         }
 
         public void Update(int time, int score)
@@ -52,8 +52,8 @@ namespace Homework9.UserControls
 
         public void Dispose()
         {
+            Timer.Enabled = false;
             Timer?.Dispose();
-            Game?.Dispose();
         }
     }
 }
