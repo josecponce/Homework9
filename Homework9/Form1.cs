@@ -53,22 +53,10 @@ namespace Homework9 {
 
 
         private void notifyIcon_MouseClick(object sender, MouseEventArgs e)
-        {
-
-            if (open == true)
-            {
-                this.Hide();
-                open = false;
-            }
-            else
-            {
+        {     
                 this.Show();
                 this.WindowState = FormWindowState.Normal;
                 open = true;
-            }
-
-           
-          
         }
 
         private void gridGameProgressControl_Load(object sender, EventArgs e)
@@ -140,6 +128,12 @@ namespace Homework9 {
                 e.Effect = DragDropEffects.Copy;
             else
                 e.Effect = DragDropEffects.None;
+        }
+
+        private void highScoreToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            HighScore.UserInfo uf = new HighScore.UserInfo();
+            uf.Show();
         }
     }
 }

@@ -34,6 +34,7 @@
             this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
             this.graphGameProgressControl = new Homework9.GraphGameProgressControl();
             this.gridGameProgressControl = new Homework9.UserControls.GridGameProgressControl();
+            this.highScoreToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -43,7 +44,8 @@
             this.newGameToolStripMenuItem,
             this.pauseGameToolStripMenuItem,
             this.saveToolStripMenuItem,
-            this.printScoreToolStripMenuItem});
+            this.printScoreToolStripMenuItem,
+            this.highScoreToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(732, 24);
@@ -110,6 +112,13 @@
             this.gridGameProgressControl.Size = new System.Drawing.Size(692, 193);
             this.gridGameProgressControl.TabIndex = 4;
             // 
+            // highScoreToolStripMenuItem
+            // 
+            this.highScoreToolStripMenuItem.Name = "highScoreToolStripMenuItem";
+            this.highScoreToolStripMenuItem.Size = new System.Drawing.Size(77, 20);
+            this.highScoreToolStripMenuItem.Text = "High Score";
+            this.highScoreToolStripMenuItem.Click += new System.EventHandler(this.highScoreToolStripMenuItem_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -143,6 +152,7 @@
         private GraphGameProgressControl graphGameProgressControl;
         private UserControls.GridGameProgressControl gridGameProgressControl;
         private System.Windows.Forms.ToolStripMenuItem printScoreToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem highScoreToolStripMenuItem;
     }
 }
 
