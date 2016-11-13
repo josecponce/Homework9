@@ -41,6 +41,11 @@ namespace Homework9 {
             Watcher.Start();
         }
 
+        private void switchViewToolStripMenuItem_Click(object sender, EventArgs e) {
+            gridGameProgressControl.Visible = (gridGameProgressControl.Visible) ? false : true;
+            graphGameProgressControl.Visible = (graphGameProgressControl.Visible) ? false : true;
+        }
+
         bool open = true;
         private void Form_Resize(object sender, MouseEventArgs e)
         {
@@ -59,16 +64,12 @@ namespace Homework9 {
                 open = true;
         }
 
-        private void gridGameProgressControl_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private delegate void Mydel();
+        private delegate void SimplestDelegate();
         private void Timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
             Game.move();
-            this.Invoke(new Mydel(Del));
+            //timer elapsed is called in a separate thread by the timer
+            this.Invoke(new SimplestDelegate(Del));
         }
         public void Del()
         {
