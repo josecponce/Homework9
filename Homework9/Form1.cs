@@ -17,7 +17,7 @@ namespace Homework9 {
         private SnakeGame Game;
         private GameProgressWatcher Watcher;
         private System.Timers.Timer timer;
-        private Rectangle dragBoxFromMouseDown;
+        //private Rectangle dragBoxFromMouseDown;
 
         public MainForm()
         {
@@ -39,6 +39,7 @@ namespace Homework9 {
             Watcher.NewData += graphGameProgressControl.UpdateGraph;
             Watcher.NewData += gridGameProgressControl.UpdateGraph;
             Watcher.Start();
+            this.graphGameProgressControl.Enabled = true;
         }
 
         bool open = true;
@@ -119,27 +120,6 @@ namespace Homework9 {
             p.ShowDialog();
         }
 
-        private void GraphDragSource_MouseDown(object sender, System.Windows.Forms.MouseEventArgs e)
-        {
-            GraphGameProgressControl gpc = (GraphGameProgressControl)sender;
-            Bitmap bmp = new Bitmap(gpc.Chart.Width, gpc.Chart.Height);
-            gpc.DrawToBitmap(bmp, new Rectangle(0, 0, gpc.Chart.Width, gpc.Chart.Height));
-            gpc.DoDragDrop(bmp, DragDropEffects.Copy);
-            
 
-
-            // Remember the point where the mouse down occurred. The DragSize indicates
-            // the size that the mouse can move before a drag event should be started.                
-            Size dragSize = SystemInformation.DragSize;           
-
-        }
-
-        private void GraphDragSource_DragEnter(object sender, DragEventArgs e)
-        {
-            if (e.Data.GetDataPresent(typeof(Bitmap)))
-                e.Effect = DragDropEffects.Copy;
-            else
-                e.Effect = DragDropEffects.None;
-        }
     }
 }

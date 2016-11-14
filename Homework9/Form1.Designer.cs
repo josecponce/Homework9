@@ -34,11 +34,14 @@
             this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
             this.graphGameProgressControl = new Homework9.GraphGameProgressControl();
             this.gridGameProgressControl = new Homework9.UserControls.GridGameProgressControl();
+            this.pictureBox = new System.Windows.Forms.PictureBox();
             this.menuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
             // 
+            this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.newGameToolStripMenuItem,
             this.pauseGameToolStripMenuItem,
@@ -46,48 +49,52 @@
             this.printScoreToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(732, 24);
+            this.menuStrip1.Padding = new System.Windows.Forms.Padding(8, 2, 0, 2);
+            this.menuStrip1.Size = new System.Drawing.Size(976, 28);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
             // newGameToolStripMenuItem
             // 
             this.newGameToolStripMenuItem.Name = "newGameToolStripMenuItem";
-            this.newGameToolStripMenuItem.Size = new System.Drawing.Size(77, 20);
+            this.newGameToolStripMenuItem.Size = new System.Drawing.Size(94, 24);
             this.newGameToolStripMenuItem.Text = "New Game";
             // 
             // pauseGameToolStripMenuItem
             // 
             this.pauseGameToolStripMenuItem.Name = "pauseGameToolStripMenuItem";
-            this.pauseGameToolStripMenuItem.Size = new System.Drawing.Size(84, 20);
+            this.pauseGameToolStripMenuItem.Size = new System.Drawing.Size(101, 24);
             this.pauseGameToolStripMenuItem.Text = "Pause Game";
             // 
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(77, 20);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(95, 24);
             this.saveToolStripMenuItem.Text = "Save Game";
             // 
             // printScoreToolStripMenuItem
             // 
             this.printScoreToolStripMenuItem.Name = "printScoreToolStripMenuItem";
-            this.printScoreToolStripMenuItem.Size = new System.Drawing.Size(76, 20);
+            this.printScoreToolStripMenuItem.Size = new System.Drawing.Size(92, 24);
             this.printScoreToolStripMenuItem.Text = "Print Score";
             this.printScoreToolStripMenuItem.Click += new System.EventHandler(this.printScoreToolStripMenuItem_Click);
             // 
             // statusStrip1
             // 
-            this.statusStrip1.Location = new System.Drawing.Point(0, 502);
+            this.statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 654);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(732, 22);
+            this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 19, 0);
+            this.statusStrip1.Size = new System.Drawing.Size(976, 22);
             this.statusStrip1.TabIndex = 1;
             this.statusStrip1.Text = "statusStrip1";
             // 
             // panel1
             // 
-            this.panel1.Location = new System.Drawing.Point(12, 27);
+            this.panel1.Location = new System.Drawing.Point(16, 152);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(693, 258);
+            this.panel1.Size = new System.Drawing.Size(924, 249);
             this.panel1.TabIndex = 2;
             // 
             // notifyIcon
@@ -98,34 +105,48 @@
             // 
             // graphGameProgressControl
             // 
-            this.graphGameProgressControl.Location = new System.Drawing.Point(13, 292);
+            this.graphGameProgressControl.Location = new System.Drawing.Point(17, 410);
+            this.graphGameProgressControl.Margin = new System.Windows.Forms.Padding(5);
             this.graphGameProgressControl.Name = "graphGameProgressControl";
-            this.graphGameProgressControl.Size = new System.Drawing.Size(692, 193);
+            this.graphGameProgressControl.Size = new System.Drawing.Size(923, 239);
             this.graphGameProgressControl.TabIndex = 3;
             // 
             // gridGameProgressControl
             // 
-            this.gridGameProgressControl.Location = new System.Drawing.Point(13, 292);
+            this.gridGameProgressControl.Location = new System.Drawing.Point(17, 410);
+            this.gridGameProgressControl.Margin = new System.Windows.Forms.Padding(5);
             this.gridGameProgressControl.Name = "gridGameProgressControl";
-            this.gridGameProgressControl.Size = new System.Drawing.Size(692, 193);
+            this.gridGameProgressControl.Size = new System.Drawing.Size(923, 238);
             this.gridGameProgressControl.TabIndex = 4;
+            // 
+            // pictureBox
+            // 
+            this.pictureBox.Location = new System.Drawing.Point(17, 43);
+            this.pictureBox.Name = "pictureBox";
+            this.pictureBox.Size = new System.Drawing.Size(130, 102);
+            this.pictureBox.TabIndex = 5;
+            this.pictureBox.TabStop = false;
             // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AllowDrop = true;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(732, 524);
+            this.ClientSize = new System.Drawing.Size(976, 676);
+            this.Controls.Add(this.pictureBox);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.menuStrip1);
-            this.Controls.Add(this.gridGameProgressControl);
             this.Controls.Add(this.graphGameProgressControl);
+            this.Controls.Add(this.gridGameProgressControl);
             this.MainMenuStrip = this.menuStrip1;
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "MainForm";
             this.Text = "Snake Game";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -143,6 +164,7 @@
         private GraphGameProgressControl graphGameProgressControl;
         private UserControls.GridGameProgressControl gridGameProgressControl;
         private System.Windows.Forms.ToolStripMenuItem printScoreToolStripMenuItem;
+        private System.Windows.Forms.PictureBox pictureBox;
     }
 }
 
