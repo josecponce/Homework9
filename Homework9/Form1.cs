@@ -17,7 +17,7 @@ namespace Homework9 {
         private SnakeGame Game;
         private GameProgressWatcher Watcher;
         private System.Timers.Timer timer;
-        //private Rectangle dragBoxFromMouseDown;
+        private Rectangle dragBoxFromMouseDown;
 
         public MainForm()
         {
@@ -39,7 +39,11 @@ namespace Homework9 {
             Watcher.NewData += graphGameProgressControl.UpdateGraph;
             Watcher.NewData += gridGameProgressControl.UpdateGraph;
             Watcher.Start();
-            this.graphGameProgressControl.Enabled = true;
+        }
+
+        private void switchViewToolStripMenuItem_Click(object sender, EventArgs e) {
+            gridGameProgressControl.Visible = (gridGameProgressControl.Visible) ? false : true;
+            graphGameProgressControl.Visible = (graphGameProgressControl.Visible) ? false : true;
         }
 
         bool open = true;
@@ -54,34 +58,18 @@ namespace Homework9 {
 
 
         private void notifyIcon_MouseClick(object sender, MouseEventArgs e)
-        {
-
-            if (open == true)
-            {
-                this.Hide();
-                open = false;
-            }
-            else
-            {
+        {     
                 this.Show();
                 this.WindowState = FormWindowState.Normal;
                 open = true;
-            }
-
-           
-          
         }
 
-        private void gridGameProgressControl_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private delegate void Mydel();
+        private delegate void SimplestDelegate();
         private void Timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
             Game.move();
-            this.Invoke(new Mydel(Del));
+            //timer elapsed is called in a separate thread by the timer
+            this.Invoke(new SimplestDelegate(Del));
         }
         public void Del()
         {
@@ -116,10 +104,33 @@ namespace Homework9 {
 
         private void printScoreToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Homework9.Printer p = new Homework9.Printer(graphGameProgressControl.Chart);
-            p.ShowDialog();
+            using (Homework9.Printer p = new Homework9.Printer(graphGameProgressControl.Chart)) {
+                p.ShowDialog();
+            }
         }
 
 
+        }
+
+        private void GraphDragSource_DragEnter(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(typeof(Bitmap)))
+                e.Effect = DragDropEffects.Copy;
+            else
+                e.Effect = DragDropEffects.None;
+        }
+
+        private void highScoreToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            HighScore.UserInfo uf = new HighScore.UserInfo();
+            uf.Show();
+        }
+
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e) {
+            timer.Enabled = false;
+            Watcher.Dispose();
+            timer.Dispose();
+            Game.Dispose();
+        }
     }
 }

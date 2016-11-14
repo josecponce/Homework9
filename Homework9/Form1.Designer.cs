@@ -29,6 +29,8 @@
             this.pauseGameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.printScoreToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.highScoreToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.switchViewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.panel1 = new System.Windows.Forms.Panel();
             this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
@@ -46,7 +48,9 @@
             this.newGameToolStripMenuItem,
             this.pauseGameToolStripMenuItem,
             this.saveToolStripMenuItem,
-            this.printScoreToolStripMenuItem});
+            this.printScoreToolStripMenuItem,
+            this.highScoreToolStripMenuItem,
+            this.switchViewToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(8, 2, 0, 2);
@@ -79,10 +83,24 @@
             this.printScoreToolStripMenuItem.Text = "Print Score";
             this.printScoreToolStripMenuItem.Click += new System.EventHandler(this.printScoreToolStripMenuItem_Click);
             // 
+            // highScoreToolStripMenuItem
+            // 
+            this.highScoreToolStripMenuItem.Name = "highScoreToolStripMenuItem";
+            this.highScoreToolStripMenuItem.Size = new System.Drawing.Size(94, 24);
+            this.highScoreToolStripMenuItem.Text = "High Score";
+            this.highScoreToolStripMenuItem.Click += new System.EventHandler(this.highScoreToolStripMenuItem_Click);
+            // 
+            // switchViewToolStripMenuItem
+            // 
+            this.switchViewToolStripMenuItem.Name = "switchViewToolStripMenuItem";
+            this.switchViewToolStripMenuItem.Size = new System.Drawing.Size(100, 24);
+            this.switchViewToolStripMenuItem.Text = "Switch View";
+            this.switchViewToolStripMenuItem.Click += new System.EventHandler(this.switchViewToolStripMenuItem_Click);
+            // 
             // statusStrip1
             // 
             this.statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.statusStrip1.Location = new System.Drawing.Point(0, 654);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 623);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 19, 0);
             this.statusStrip1.Size = new System.Drawing.Size(976, 22);
@@ -118,6 +136,7 @@
             this.gridGameProgressControl.Name = "gridGameProgressControl";
             this.gridGameProgressControl.Size = new System.Drawing.Size(923, 238);
             this.gridGameProgressControl.TabIndex = 4;
+            this.gridGameProgressControl.Visible = false;
             // 
             // pictureBox
             // 
@@ -143,6 +162,7 @@
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "MainForm";
             this.Text = "Snake Game";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
@@ -164,6 +184,8 @@
         private GraphGameProgressControl graphGameProgressControl;
         private UserControls.GridGameProgressControl gridGameProgressControl;
         private System.Windows.Forms.ToolStripMenuItem printScoreToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem highScoreToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem switchViewToolStripMenuItem;
         private System.Windows.Forms.PictureBox pictureBox;
     }
 }
