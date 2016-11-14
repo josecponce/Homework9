@@ -57,7 +57,6 @@ namespace Homework9 {
             }
         }
 
-
         private void notifyIcon_MouseClick(object sender, MouseEventArgs e)
         {     
                 this.Show();
@@ -141,6 +140,12 @@ namespace Homework9 {
         {
             ToolTip tt = new ToolTip();
             tt.SetToolTip(this.pictureBox, "Drag and Drop a picture!");
+        }
+
+        private void highScoreToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            HighScore.UserInfo uf = new HighScore.UserInfo();
+            uf.Show();
         }
     }
 }
