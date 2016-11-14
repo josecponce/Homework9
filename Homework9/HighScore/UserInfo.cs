@@ -20,8 +20,29 @@ namespace Homework9.HighScore
         // Add Name to List View
         private void addPlayerName_Click(object sender, EventArgs e)
         {
-            playerListView.Items.Add(playerNameTextBox.Text);
-            playerNameTextBox.Clear();
+            bool validName = true;
+            bool validAge = true;
+            if(playerNameTextBox.Text.Equals("")){
+                nameError.SetError(playerNameTextBox, "Name can't be empty");
+                validName = false;
+            }
+            int age = Convert.ToInt32(playerAgeTextBox.Text);
+
+            if (playerAgeTextBox.Text.Equals("")){
+                ageError.SetError(playerAgeTextBox, "Age can't be empty");
+                validAge = false;
+            }
+            
+
+                if (validName == true && validAge == true)
+            {
+                playerListView.Items.Add(playerNameTextBox.Text, playerAgeTextBox.Text);
+                playerNameTextBox.Clear();
+                playerAgeTextBox.Clear();
+                nameError.Clear();
+                ageError.Clear();
+            }
+            
          }
 
         //Cut, Copy, Paste
@@ -40,5 +61,15 @@ namespace Homework9.HighScore
             if (Clipboard.GetDataObject().GetDataPresent(DataFormats.Text) == true)
                 playerNameTextBox.Paste();
         }
+
+        private void playerNameTextBox_MouseMove(Object sender, MouseEventArgs e)
+        {
+            nameToolTip.SetToolTip(playerNameTextBox, "Enter Your Name");
+        }
+        private void playerAgeTextBox_MouseMove(Object sender, MouseEventArgs e)
+        {
+            AgeToolTip.SetToolTip(playerAgeTextBox, "Enter Your Age");
+        }
+  
     }
 }

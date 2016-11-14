@@ -43,6 +43,7 @@ namespace Homework9 {
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            ((Control)pictureBox).AllowDrop = true;
             Watcher = new GameProgressWatcher(Game, this);
             Watcher.NewData += graphGameProgressControl.UpdateGraph;
             Watcher.NewData += gridGameProgressControl.UpdateGraph;
@@ -63,7 +64,6 @@ namespace Homework9 {
                 open = false;
             }
         }
-
 
         private void notifyIcon_MouseClick(object sender, MouseEventArgs e)
         {     
@@ -117,40 +117,43 @@ namespace Homework9 {
             }
         }
 
-        private void GraphDragSource_MouseDown(object sender, System.Windows.Forms.MouseEventArgs e)
-        {
-            GraphGameProgressControl gpc = (GraphGameProgressControl)sender;
-            Bitmap bmp = new Bitmap(gpc.Chart.Width, gpc.Chart.Height);
-            gpc.DrawToBitmap(bmp, new Rectangle(0, 0, gpc.Chart.Width, gpc.Chart.Height));
-            gpc.DoDragDrop(bmp, DragDropEffects.Copy);
-            
-
-
-            // Remember the point where the mouse down occurred. The DragSize indicates
-            // the size that the mouse can move before a drag event should be started.                
-            Size dragSize = SystemInformation.DragSize;           
-
+       private void MainForm_FormClosing(object sender, FormClosingEventArgs e) {
+            timer.Enabled = false;
+            Watcher.Dispose();
+            timer.Dispose();
+            Game.Dispose();
         }
 
-        private void GraphDragSource_DragEnter(object sender, DragEventArgs e)
+        private void pictureBox_DragDrop(object sender, DragEventArgs e)
         {
-            if (e.Data.GetDataPresent(typeof(Bitmap)))
+            try
+            {
+                var files = (string[])e.Data.GetData(DataFormats.FileDrop);
+                string file = files[0];
+                // Insert the item.
+                pictureBox.Image = Image.FromFile(file);
+
+            } catch(Exception)
+            {
+                MessageBox.Show("The image selected is not supported. \r\nSelect another picture", " ",MessageBoxButtons.OK , MessageBoxIcon.Error);
+            }
+
+        }
+        private void pictureBox_DragEnter(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
                 e.Effect = DragDropEffects.Copy;
-            else
-                e.Effect = DragDropEffects.None;
+        }
+        private void pictureBox_MouseHover(object sender, EventArgs e)
+        {
+            ToolTip tt = new ToolTip();
+            tt.SetToolTip(this.pictureBox, "Drag and Drop a picture!");
         }
 
         private void highScoreToolStripMenuItem_Click(object sender, EventArgs e)
         {
             HighScore.UserInfo uf = new HighScore.UserInfo();
             uf.Show();
-        }
-
-        private void MainForm_FormClosing(object sender, FormClosingEventArgs e) {
-            timer.Enabled = false;
-            Watcher.Dispose();
-            timer.Dispose();
-            Game.Dispose();
         }
     }
 }
