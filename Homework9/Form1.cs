@@ -35,6 +35,7 @@ namespace Homework9 {
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            ((Control)pictureBox).AllowDrop = true;
             Watcher = new GameProgressWatcher(Game, this);
             Watcher.NewData += graphGameProgressControl.UpdateGraph;
             Watcher.NewData += gridGameProgressControl.UpdateGraph;
@@ -114,6 +115,28 @@ namespace Homework9 {
             Watcher.Dispose();
             timer.Dispose();
             Game.Dispose();
+        }
+
+        private void pictureBox_DragDrop(object sender, DragEventArgs e)
+        {
+            try
+            {
+                var files = (string[])e.Data.GetData(DataFormats.FileDrop);
+                string file = files[0];
+
+
+                // Insert the item.
+                pictureBox.Image = Image.FromFile(file);
+            }catch(Exception)
+            {
+                MessageBox.Show("The image selected is not supported. \r\nSelect another picture", " ",MessageBoxButtons.OK , MessageBoxIcon.Error);
+            }
+
+        }
+        private void pictureBox_DragEnter(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+                e.Effect = DragDropEffects.Copy;
         }
     }
 }
