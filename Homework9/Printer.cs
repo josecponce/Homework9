@@ -40,7 +40,6 @@ namespace Homework9 {
         }
 
         public void ShowDialog() {
-            Task.Run(() => pd.Print());
             printPreviewDialog.ShowDialog();
         }
 

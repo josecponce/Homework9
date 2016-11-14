@@ -88,7 +88,6 @@
             this.highScoreToolStripMenuItem.Name = "highScoreToolStripMenuItem";
             this.highScoreToolStripMenuItem.Size = new System.Drawing.Size(94, 24);
             this.highScoreToolStripMenuItem.Text = "High Score";
-            this.highScoreToolStripMenuItem.Click += new System.EventHandler(this.highScoreToolStripMenuItem_Click);
             // 
             // switchViewToolStripMenuItem
             // 

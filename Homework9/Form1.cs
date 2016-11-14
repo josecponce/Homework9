@@ -109,24 +109,7 @@ namespace Homework9 {
             }
         }
 
-
-        }
-
-        private void GraphDragSource_DragEnter(object sender, DragEventArgs e)
-        {
-            if (e.Data.GetDataPresent(typeof(Bitmap)))
-                e.Effect = DragDropEffects.Copy;
-            else
-                e.Effect = DragDropEffects.None;
-        }
-
-        private void highScoreToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            HighScore.UserInfo uf = new HighScore.UserInfo();
-            uf.Show();
-        }
-
-        private void MainForm_FormClosing(object sender, FormClosingEventArgs e) {
+       private void MainForm_FormClosing(object sender, FormClosingEventArgs e) {
             timer.Enabled = false;
             Watcher.Dispose();
             timer.Dispose();
