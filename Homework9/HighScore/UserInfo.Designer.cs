@@ -51,7 +51,7 @@
             this.playerNameTextBox.Name = "playerNameTextBox";
             this.playerNameTextBox.Size = new System.Drawing.Size(97, 20);
             this.playerNameTextBox.TabIndex = 1;
-            this.playerNameTextBox.MouseMove += new System.Windows.Forms.MouseEventHandler(this.playerNameTextBox_MouseMove);
+            this.nameToolTip.SetToolTip(this.playerNameTextBox, "Enter Your Name");
             // 
             // addPlayerName
             // 
@@ -91,7 +91,7 @@
             this.playerAgeTextBox.Name = "playerAgeTextBox";
             this.playerAgeTextBox.Size = new System.Drawing.Size(60, 20);
             this.playerAgeTextBox.TabIndex = 4;
-            this.playerAgeTextBox.MouseMove += new System.Windows.Forms.MouseEventHandler(this.playerAgeTextBox_MouseMove);
+            this.AgeToolTip.SetToolTip(this.playerAgeTextBox, "Enter Your Age");
             // 
             // label2
             // 

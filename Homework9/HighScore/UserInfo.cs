@@ -60,16 +60,6 @@ namespace Homework9.HighScore
         {
             if (Clipboard.GetDataObject().GetDataPresent(DataFormats.Text) == true)
                 playerNameTextBox.Paste();
-        }
-
-        private void playerNameTextBox_MouseMove(Object sender, MouseEventArgs e)
-        {
-            nameToolTip.SetToolTip(playerNameTextBox, "Enter Your Name");
-        }
-        private void playerAgeTextBox_MouseMove(Object sender, MouseEventArgs e)
-        {
-            AgeToolTip.SetToolTip(playerAgeTextBox, "Enter Your Age");
-        }
-  
+        }  
     }
 }
