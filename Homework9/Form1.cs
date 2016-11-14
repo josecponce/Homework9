@@ -119,8 +119,11 @@ namespace Homework9 {
 
        private void MainForm_FormClosing(object sender, FormClosingEventArgs e) {
             timer.Enabled = false;
-            Watcher.Dispose();
+            timer.Elapsed -= Timer_Elapsed;
             timer.Dispose();
+            Watcher.NewData -= graphGameProgressControl.UpdateGraph;
+            Watcher.NewData -= gridGameProgressControl.UpdateGraph;
+            Watcher.Dispose();            
             Game.Dispose();
         }
 

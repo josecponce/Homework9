@@ -52,6 +52,7 @@ namespace Homework9.UserControls
 
         public void Dispose()
         {
+            Timer.Elapsed -= RefreshData;
             Timer.Enabled = false;
             Timer?.Dispose();
         }
