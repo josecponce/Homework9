@@ -140,7 +140,7 @@ namespace Homework9 {
         private void pictureBox_MouseHover(object sender, EventArgs e)
         {
             ToolTip tt = new ToolTip();
-            tt.SetToolTip(this.pictureBox, "Drag and Drop a user picture");
+            tt.SetToolTip(this.pictureBox, "Drag and Drop a picture!");
         }
     }
 }
