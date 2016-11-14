@@ -123,11 +123,10 @@ namespace Homework9 {
             {
                 var files = (string[])e.Data.GetData(DataFormats.FileDrop);
                 string file = files[0];
-
-
                 // Insert the item.
                 pictureBox.Image = Image.FromFile(file);
-            }catch(Exception)
+
+            } catch(Exception)
             {
                 MessageBox.Show("The image selected is not supported. \r\nSelect another picture", " ",MessageBoxButtons.OK , MessageBoxIcon.Error);
             }
@@ -137,6 +136,11 @@ namespace Homework9 {
         {
             if (e.Data.GetDataPresent(DataFormats.FileDrop))
                 e.Effect = DragDropEffects.Copy;
+        }
+        private void pictureBox_MouseHover(object sender, EventArgs e)
+        {
+            ToolTip tt = new ToolTip();
+            tt.SetToolTip(this.pictureBox, "Drag and Drop a user picture");
         }
     }
 }

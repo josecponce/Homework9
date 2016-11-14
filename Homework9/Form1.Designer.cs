@@ -131,6 +131,7 @@
             this.pictureBox.TabStop = false;
             this.pictureBox.DragDrop += new System.Windows.Forms.DragEventHandler(this.pictureBox_DragDrop);
             this.pictureBox.DragEnter += new System.Windows.Forms.DragEventHandler(this.pictureBox_DragEnter);
+            this.pictureBox.MouseHover += new System.EventHandler(this.pictureBox_MouseHover);
             // 
             // graphGameProgressControl
             // 
