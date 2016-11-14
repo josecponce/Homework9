@@ -19,16 +19,14 @@ using System.Windows.Forms;
  * -drag and drop
  */
 namespace Homework9 {
-    public partial class MainForm : Form
-    {
+    public partial class MainForm : Form {
 
         private SnakeGame Game;
         private GameProgressWatcher Watcher;
         private System.Timers.Timer timer;
         private Rectangle dragBoxFromMouseDown;
 
-        public MainForm()
-        {
+        public MainForm() {
             InitializeComponent();
             Game = new SnakeGame();
             this.notifyIcon.Icon = Properties.Resources.snakeIcon;
@@ -39,10 +37,15 @@ namespace Homework9 {
             timer.Interval = 1000;
             timer.Elapsed += Timer_Elapsed;
             timer.Enabled = true;
+
+            gamePanel.Paint += GamePanel_Paint;
         }
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
+        private void GamePanel_Paint(object sender, PaintEventArgs e) {
+            Game.doDrawing(e.Graphics);
+        }
+
+        private void Form1_Load(object sender, EventArgs e) {
             ((Control)pictureBox).AllowDrop = true;
             Watcher = new GameProgressWatcher(Game, this);
             Watcher.NewData += graphGameProgressControl.UpdateGraph;
@@ -56,107 +59,94 @@ namespace Homework9 {
         }
 
         bool open = true;
-        private void Form_Resize(object sender, MouseEventArgs e)
-        {
-            if (WindowState == FormWindowState.Minimized)
-            {
+        private void Form_Resize(object sender, MouseEventArgs e) {
+            if (WindowState == FormWindowState.Minimized) {
                 this.Hide();
                 open = false;
             }
         }
 
-        private void notifyIcon_MouseClick(object sender, MouseEventArgs e)
-        {     
-                this.Show();
-                this.WindowState = FormWindowState.Normal;
-                open = true;
+        private void notifyIcon_MouseClick(object sender, MouseEventArgs e) {
+            this.Show();
+            this.WindowState = FormWindowState.Normal;
+            open = true;
         }
 
         private delegate void SimplestDelegate();
-        private void Timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
-        {
+        private void Timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e) {
             Game.move();
             //timer elapsed is called in a separate thread by the timer
             this.Invoke(new SimplestDelegate(Del));
         }
-        public void Del()
-        {
-            this.Invalidate();
+        public void Del() {
+            this.Invalidate(true);
         }
-        private void Form1_Paint(object sender, PaintEventArgs e)
-        {
-            Game.doDrawing(e.Graphics);
-
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData) {
+            switch (keyData) {
+                case Keys.Up:
+                case Keys.Down:
+                case Keys.Right:
+                case Keys.Left:
+                    ProcessKeyDown(keyData);
+                    return true;
+            }
+            return base.ProcessCmdKey(ref msg, keyData);
         }
-
-        private void Form1_KeyDown(object sender, KeyEventArgs e)
-        {
-
-            if (e.KeyCode == Keys.Up)
+        private void ProcessKeyDown(Keys key) {
+            if (key == Keys.Up)
                 Game.setDirection(0);
-
-            if (e.KeyCode == Keys.Right)
+            else if (key == Keys.Right)
                 Game.setDirection(1);
-
-            if (e.KeyCode == Keys.Down)
+            else if (key == Keys.Down)
                 Game.setDirection(2);
-
-            if (e.KeyCode == Keys.Left)
+            else if (key == Keys.Left)
                 Game.setDirection(3);
 
-            Game.move();
-            this.Refresh();
-            //MessageBox.Show(game.SnakeDirection+" ");
-
+            this.Invalidate(true);
         }
 
-        private void printScoreToolStripMenuItem_Click(object sender, EventArgs e)
-        {
+        private void printScoreToolStripMenuItem_Click(object sender, EventArgs e) {
             using (Homework9.Printer p = new Homework9.Printer(graphGameProgressControl.Chart)) {
                 p.ShowDialog();
             }
         }
 
-       private void MainForm_FormClosing(object sender, FormClosingEventArgs e) {
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e) {
             timer.Enabled = false;
             timer.Elapsed -= Timer_Elapsed;
             timer.Dispose();
             Watcher.NewData -= graphGameProgressControl.UpdateGraph;
             Watcher.NewData -= gridGameProgressControl.UpdateGraph;
-            Watcher.Dispose();            
+            Watcher.Dispose();
             Game.Dispose();
         }
 
-        private void pictureBox_DragDrop(object sender, DragEventArgs e)
-        {
-            try
-            {
+        private void pictureBox_DragDrop(object sender, DragEventArgs e) {
+            try {
                 var files = (string[])e.Data.GetData(DataFormats.FileDrop);
                 string file = files[0];
                 // Insert the item.
                 pictureBox.Image = Image.FromFile(file);
 
-            } catch(Exception)
-            {
-                MessageBox.Show("The image selected is not supported. \r\nSelect another picture", " ",MessageBoxButtons.OK , MessageBoxIcon.Error);
+            } catch (Exception) {
+                MessageBox.Show("The image selected is not supported. \r\nSelect another picture", " ", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
         }
-        private void pictureBox_DragEnter(object sender, DragEventArgs e)
-        {
+        private void pictureBox_DragEnter(object sender, DragEventArgs e) {
             if (e.Data.GetDataPresent(DataFormats.FileDrop))
                 e.Effect = DragDropEffects.Copy;
         }
-        private void pictureBox_MouseHover(object sender, EventArgs e)
-        {
+        private void pictureBox_MouseHover(object sender, EventArgs e) {
             ToolTip tt = new ToolTip();
             tt.SetToolTip(this.pictureBox, "Drag and Drop a picture!");
         }
 
-        private void highScoreToolStripMenuItem_Click(object sender, EventArgs e)
-        {
+        private void highScoreToolStripMenuItem_Click(object sender, EventArgs e) {
             HighScore.UserInfo uf = new HighScore.UserInfo();
             uf.Show();
         }
+
+        
     }
 }
