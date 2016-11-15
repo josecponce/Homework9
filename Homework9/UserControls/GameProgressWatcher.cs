@@ -43,7 +43,11 @@ namespace Homework9.UserControls
             int currentTime = time;
             Data.Add(new Point(time, score));
             if (!Owner.IsDisposed) {
-                Owner?.Invoke(new UpdateGraphDel(Update), new object[] { currentTime, score });
+                try
+                {
+                    Owner?.Invoke(new UpdateGraphDel(Update), new object[] { currentTime, score });
+                }
+                catch (Exception ee) { }
             }            
         }
 

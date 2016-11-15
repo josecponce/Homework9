@@ -69,7 +69,11 @@ namespace Homework9 {
 
         private void Game_GameChanged() {//this is called in a separate thread
             if (!this.IsDisposed) {
-                this.Invoke(new SimplestDelegate(Del));
+                try
+                {
+                    this.Invoke(new SimplestDelegate(Del));
+                }
+                catch (Exception e) { }
             }            
         }
         public void Del() {
@@ -152,6 +156,17 @@ namespace Homework9 {
                 Watcher.Resume();
                 pauseGameToolStripMenuItem.Text = "Pause Game";
             }
+
+        }
+
+        private void StartNewGame(object sender, EventArgs e)
+        {
+            Watcher.Pause();
+            Game.Pause();
+            MainForm fr = new MainForm();
+            fr.Show();
+
+            this.Dispose(false);
 
         }
     }

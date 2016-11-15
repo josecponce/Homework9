@@ -83,7 +83,8 @@ namespace Homework9.Domain {
                 for (int z = 0; z < Snake.Length; z++) {
                     //location of where to draw:
                     rectangleGraphic = new Rectangle(Snake.Location[z].X, Snake.Location[z].Y, DOTSIZE, DOTSIZE);
-                    g.DrawRectangle(Pens.Black, rectangleGraphic);
+                    SolidBrush myBrush = new SolidBrush(System.Drawing.Color.Green);
+                    g.FillRectangle(myBrush , rectangleGraphic);
                 }
             } else {
                 gameOver();
