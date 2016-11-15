@@ -12,10 +12,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 /*
- * -pause the game
  * -high scores should actually have the scores(store in the filesystem)
- * -apples placed at the right coordinates
- * -apples placed automatically
  * -check that snake doesnt go out of bounds(lose)
  * -drag and drop
  */

@@ -11,7 +11,7 @@ namespace Homework9.Domain {
     public class SnakeGame : IDisposable {
         public delegate void SimplestDelegate();
         public event SimplestDelegate GameChanged;
-        public int Score => Snake.Length;
+        public int Score => Snake.Length - 3;
         public Direction SnakeDirection => Snake.Direction;
 
         private Snake Snake;
@@ -89,11 +89,16 @@ namespace Homework9.Domain {
                 gameOver();
             }
         }
-
+         HighScore.UserInfo uf = new HighScore.UserInfo();
         private void gameOver() {
             MoveTimer.Enabled = false;
             AppleTimer.Enabled = false;
-            MessageBox.Show("Game Over");            
+            DialogResult result = MessageBox.Show("Better Luck Next Time.","Game Over!", MessageBoxButtons.OK); 
+            if(result == DialogResult.OK)
+            {
+                uf.LoadOrders(Snake.Length);
+                uf.ShowDialog();       
+            }      
         }
 
         public void addApple() {

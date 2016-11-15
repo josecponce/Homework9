@@ -31,7 +31,7 @@
             this.components = new System.ComponentModel.Container();
             this.playerNameTextBox = new System.Windows.Forms.TextBox();
             this.addPlayerName = new System.Windows.Forms.Button();
-            this.playerListView = new System.Windows.Forms.ListView();
+            this.nameListView = new System.Windows.Forms.ListView();
             this.NameColum = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.ScoreColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.playerAgeTextBox = new System.Windows.Forms.TextBox();
@@ -41,6 +41,9 @@
             this.AgeToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.nameError = new System.Windows.Forms.ErrorProvider(this.components);
             this.ageError = new System.Windows.Forms.ErrorProvider(this.components);
+            this.scoreListView = new System.Windows.Forms.ListView();
+            this.Name = new System.Windows.Forms.Label();
+            this.Score = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.nameError)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ageError)).BeginInit();
             this.SuspendLayout();
@@ -63,19 +66,19 @@
             this.addPlayerName.UseVisualStyleBackColor = true;
             this.addPlayerName.Click += new System.EventHandler(this.addPlayerName_Click);
             // 
-            // playerListView
+            // nameListView
             // 
-            this.playerListView.BackgroundImageTiled = true;
-            this.playerListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.nameListView.BackgroundImageTiled = true;
+            this.nameListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.NameColum,
             this.ScoreColumn});
-            this.playerListView.LabelWrap = false;
-            this.playerListView.Location = new System.Drawing.Point(12, 152);
-            this.playerListView.Name = "playerListView";
-            this.playerListView.Size = new System.Drawing.Size(316, 288);
-            this.playerListView.TabIndex = 3;
-            this.playerListView.UseCompatibleStateImageBehavior = false;
-            this.playerListView.View = System.Windows.Forms.View.List;
+            this.nameListView.LabelWrap = false;
+            this.nameListView.Location = new System.Drawing.Point(12, 152);
+            this.nameListView.Name = "nameListView";
+            this.nameListView.Size = new System.Drawing.Size(213, 288);
+            this.nameListView.TabIndex = 3;
+            this.nameListView.UseCompatibleStateImageBehavior = false;
+            this.nameListView.View = System.Windows.Forms.View.List;
             // 
             // NameColum
             // 
@@ -128,20 +131,49 @@
             // 
             this.ageError.ContainerControl = this;
             // 
+            // scoreListView
+            // 
+            this.scoreListView.Location = new System.Drawing.Point(207, 152);
+            this.scoreListView.Name = "scoreListView";
+            this.scoreListView.Size = new System.Drawing.Size(121, 288);
+            this.scoreListView.TabIndex = 7;
+            this.scoreListView.UseCompatibleStateImageBehavior = false;
+            this.scoreListView.View = System.Windows.Forms.View.List;
+            // 
+            // Name
+            // 
+            this.Name.AutoSize = true;
+            this.Name.Location = new System.Drawing.Point(72, 136);
+            this.Name.Name = "Name";
+            this.Name.Size = new System.Drawing.Size(35, 13);
+            this.Name.TabIndex = 8;
+            this.Name.Text = "Name";
+            // 
+            // Score
+            // 
+            this.Score.AutoSize = true;
+            this.Score.Location = new System.Drawing.Point(250, 136);
+            this.Score.Name = "Score";
+            this.Score.Size = new System.Drawing.Size(35, 13);
+            this.Score.TabIndex = 9;
+            this.Score.Text = "Score";
+            // 
             // UserInfo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(340, 452);
+            this.Controls.Add(this.Score);
+            this.Controls.Add(this.Name);
+            this.Controls.Add(this.scoreListView);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.playerAgeTextBox);
-            this.Controls.Add(this.playerListView);
+            this.Controls.Add(this.nameListView);
             this.Controls.Add(this.addPlayerName);
             this.Controls.Add(this.playerNameTextBox);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "UserInfo";
             this.Text = "High Score";
             ((System.ComponentModel.ISupportInitialize)(this.nameError)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ageError)).EndInit();
@@ -153,7 +185,7 @@
         #endregion
         private System.Windows.Forms.TextBox playerNameTextBox;
         private System.Windows.Forms.Button addPlayerName;
-        private System.Windows.Forms.ListView playerListView;
+        private System.Windows.Forms.ListView nameListView;
         public System.Windows.Forms.ColumnHeader NameColum;
         private System.Windows.Forms.ColumnHeader ScoreColumn;
         private System.Windows.Forms.TextBox playerAgeTextBox;
@@ -163,5 +195,8 @@
         private System.Windows.Forms.ToolTip AgeToolTip;
         private System.Windows.Forms.ErrorProvider nameError;
         private System.Windows.Forms.ErrorProvider ageError;
+        private System.Windows.Forms.Label Score;
+        private System.Windows.Forms.Label Name;
+        private System.Windows.Forms.ListView scoreListView;
     }
 }

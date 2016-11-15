@@ -29,6 +29,7 @@ namespace Homework9.Domain
             Direction = startingDirection;
             Location = new List<Point>();
            
+
             Length = 1;
         }
     }
