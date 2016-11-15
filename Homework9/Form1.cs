@@ -26,14 +26,8 @@ namespace Homework9 {
         private Rectangle dragBoxFromMouseDown;
 
         public MainForm() {
-            InitializeComponent();
-            Game = new SnakeGame();
+            InitializeComponent();            
             this.notifyIcon.Icon = Properties.Resources.snakeIcon;
-            Game = new SnakeGame();
-            Game.GameChanged += Game_GameChanged;
-            Game.addApple();
-            Game.initGame();
-
             gamePanel.Paint += GamePanel_Paint;
         }
 
@@ -42,7 +36,12 @@ namespace Homework9 {
         }
 
         private void Form1_Load(object sender, EventArgs e) {
-            ((Control)pictureBox).AllowDrop = true;
+            pictureBox.AllowDrop = true;
+
+            Game = new SnakeGame(gamePanel.Size);
+            Game.GameChanged += Game_GameChanged;
+            Game.initGame();
+
             Watcher = new GameProgressWatcher(Game, this);
             Watcher.NewData += graphGameProgressControl.UpdateGraph;
             Watcher.NewData += gridGameProgressControl.UpdateGraph;
@@ -108,11 +107,13 @@ namespace Homework9 {
             }
         }
 
-        private void MainForm_FormClosing(object sender, FormClosingEventArgs e) {            
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e) {
+            Game.GameChanged -= Game_GameChanged;
+            Game.Dispose();
+
             Watcher.NewData -= graphGameProgressControl.UpdateGraph;
             Watcher.NewData -= gridGameProgressControl.UpdateGraph;
-            Watcher.Dispose();
-            Game.Dispose();
+            Watcher.Dispose();            
         }
 
         private void pictureBox_DragDrop(object sender, DragEventArgs e) {

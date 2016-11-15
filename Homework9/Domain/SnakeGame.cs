@@ -20,55 +20,69 @@ namespace Homework9.Domain {
         private bool inGame;
         private Rectangle rectangleGraphic;
         private int DOTSIZE = 20;
-        private Point apple;
+        private List<Point> Apples = new List<Point>();
+        private Size BoardSize;
 
-        public SnakeGame() {
+        public SnakeGame(Size boardSize) {
+            BoardSize = boardSize;
             Snake = new Snake(new Point(0, 0), Direction.Right);
 
             MoveTimer = new System.Timers.Timer();
             MoveTimer.Elapsed += MoveTimer_Elapsed;
             MoveTimer.Interval = 500;
 
+            AppleTimer = new System.Timers.Timer();
+            AppleTimer.Elapsed += AppleTimer_Elapsed;
+            AppleTimer.Interval = 5000;
+
             inGame = true;
             rectangleGraphic = new Rectangle(10, 10, DOTSIZE, DOTSIZE);
-            apple = new Point(50, 50);
+        }
 
-            AppleTimer = new System.Timers.Timer();
-
+        private void AppleTimer_Elapsed(object sender, ElapsedEventArgs e) {
+            addApple();
         }
 
         private void MoveTimer_Elapsed(object sender, ElapsedEventArgs e) {
             move();
-            GameChanged?.Invoke();
         }
 
         public bool Paused { get; private set; }
         public void Pause() {
             MoveTimer.Enabled = false;
+            AppleTimer.Enabled = false;
             Paused = true;
         }
         public void Resume() {
             Paused = false;
             MoveTimer.Enabled = true;
+            AppleTimer.Enabled = true;
         }
         public void EndGame() {
             MoveTimer.Enabled = false;
+            AppleTimer.Enabled = false;
         }
 
         public void Dispose() {
+            MoveTimer.Elapsed -= MoveTimer_Elapsed;
             MoveTimer.Enabled = false;
             MoveTimer?.Dispose();
-            MoveTimer.Elapsed -= MoveTimer_Elapsed;
+
+            AppleTimer.Elapsed -= AppleTimer_Elapsed;
+            AppleTimer.Enabled = false;
+            AppleTimer?.Dispose();
         }
 
         public void doDrawing(Graphics g) {
-            if (inGame) {                
-                //draw fruit:
-                g.DrawRectangle(new Pen(Color.Red), new Rectangle(apple.X, apple.Y, DOTSIZE, DOTSIZE));
+            if (inGame) {
+                //draw fruits
+                foreach (var apple in Apples) {
+                    g.DrawRectangle(new Pen(Color.Red), new Rectangle(apple.X, apple.Y, DOTSIZE, DOTSIZE));
+                }
 
                 for (int z = 0; z < Snake.Length; z++) {
                     //location of where to draw:
-                    rectangleGraphic = new Rectangle(Snake.location[z].X, Snake.location[z].Y, DOTSIZE, DOTSIZE);                    
+                    rectangleGraphic = new Rectangle(Snake.location[z].X, Snake.location[z].Y, DOTSIZE, DOTSIZE);
                     g.DrawRectangle(new Pen(Color.Black), rectangleGraphic);
                 }
             } else {
@@ -78,12 +92,19 @@ namespace Homework9.Domain {
 
         private void gameOver(Graphics g) {
             MessageBox.Show("Game Over");
+            MoveTimer.Enabled = false;
+            AppleTimer.Enabled = false;
         }
 
         public void addApple() {
             Random rnd = new Random();
-            apple.X = rnd.Next(0, 500);
-            apple.Y = rnd.Next(0, 500);
+            Point apple = new Point();
+            apple.X = rnd.Next(0, (BoardSize.Width - DOTSIZE) / DOTSIZE);
+            apple.X = (DOTSIZE / 2) + (apple.X * DOTSIZE);
+            apple.Y = rnd.Next(0, (BoardSize.Height - DOTSIZE) / DOTSIZE);
+            apple.Y = (DOTSIZE / 2) + (apple.Y * DOTSIZE);
+            Apples.Add(apple);
+            GameChanged?.Invoke();
         }
 
         public void setDirection(int i) {
@@ -105,25 +126,26 @@ namespace Homework9.Domain {
 
             if (SnakeDirection == Direction.Left) {
                 Snake.location[0] = new Point(point.X -= DOTSIZE, point.Y);
-            }
-            else if (SnakeDirection == Direction.Right) {
+            } else if (SnakeDirection == Direction.Right) {
                 Snake.location[0] = new Point(point.X += DOTSIZE, point.Y);
-            }
-            else if (SnakeDirection == Direction.Up) {
+            } else if (SnakeDirection == Direction.Up) {
                 Snake.location[0] = new Point(point.X, point.Y -= DOTSIZE);
-            }
-            else if (SnakeDirection == Direction.Down) {
+            } else if (SnakeDirection == Direction.Down) {
                 Snake.location[0] = new Point(point.X, point.Y += DOTSIZE);
             }
+
+            GameChanged?.Invoke();
         }
 
         //draws at the start
         public void initGame() {
+            addApple();
             Snake.Length = 3;
             for (int z = 0; z < Snake.Length; z++) {
                 Snake.location.Add(new Point(50 - z * 10, 50));
             }
             MoveTimer.Enabled = true;
+            AppleTimer.Enabled = true;
         }
     }
 }
