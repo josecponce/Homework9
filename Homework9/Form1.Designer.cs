@@ -167,6 +167,7 @@
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.graphGameProgressControl);
             this.Controls.Add(this.gridGameProgressControl);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.KeyPreview = true;
             this.MainMenuStrip = this.menuStrip1;
             this.Margin = new System.Windows.Forms.Padding(4);
