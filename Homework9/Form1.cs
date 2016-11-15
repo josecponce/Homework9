@@ -22,8 +22,7 @@ namespace Homework9 {
     public partial class MainForm : Form {
 
         private SnakeGame Game;
-        private GameProgressWatcher Watcher;
-        private System.Timers.Timer timer;
+        private GameProgressWatcher Watcher;        
         private Rectangle dragBoxFromMouseDown;
 
         public MainForm() {
@@ -31,12 +30,9 @@ namespace Homework9 {
             Game = new SnakeGame();
             this.notifyIcon.Icon = Properties.Resources.snakeIcon;
             Game = new SnakeGame();
+            Game.GameChanged += Game_GameChanged;
             Game.addApple();
             Game.initGame();
-            timer = new System.Timers.Timer();
-            timer.Interval = 1000;
-            timer.Elapsed += Timer_Elapsed;
-            timer.Enabled = true;
 
             gamePanel.Paint += GamePanel_Paint;
         }
@@ -73,10 +69,11 @@ namespace Homework9 {
         }
 
         private delegate void SimplestDelegate();
-        private void Timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e) {
-            Game.move();
-            //timer elapsed is called in a separate thread by the timer
-            this.Invoke(new SimplestDelegate(Del));
+
+        private void Game_GameChanged() {//this is called in a separate thread
+            if (!this.IsDisposed) {
+                this.Invoke(new SimplestDelegate(Del));
+            }            
         }
         public void Del() {
             this.Invalidate(true);
@@ -111,10 +108,7 @@ namespace Homework9 {
             }
         }
 
-        private void MainForm_FormClosing(object sender, FormClosingEventArgs e) {
-            timer.Enabled = false;
-            timer.Elapsed -= Timer_Elapsed;
-            timer.Dispose();
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e) {            
             Watcher.NewData -= graphGameProgressControl.UpdateGraph;
             Watcher.NewData -= gridGameProgressControl.UpdateGraph;
             Watcher.Dispose();
