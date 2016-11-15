@@ -52,6 +52,16 @@ namespace Homework9.UserControls
             NewData?.Invoke(time, score);
         }
 
+        public bool Paused { get; private set; }
+        public void Pause() {
+            Timer.Enabled = false;
+            Paused = true;
+        }
+        public void Resume() {
+            Paused = false;
+            Timer.Enabled = true;
+        }
+
         public void Dispose()
         {
             Timer.Elapsed -= RefreshData;

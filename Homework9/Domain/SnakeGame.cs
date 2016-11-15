@@ -42,6 +42,15 @@ namespace Homework9.Domain {
             GameChanged?.Invoke();
         }
 
+        public bool Paused { get; private set; }
+        public void Pause() {
+            MoveTimer.Enabled = false;
+            Paused = true;
+        }
+        public void Resume() {
+            Paused = false;
+            MoveTimer.Enabled = true;
+        }
         public void EndGame() {
             MoveTimer.Enabled = false;
         }

@@ -69,6 +69,7 @@
             this.pauseGameToolStripMenuItem.Name = "pauseGameToolStripMenuItem";
             this.pauseGameToolStripMenuItem.Size = new System.Drawing.Size(101, 24);
             this.pauseGameToolStripMenuItem.Text = "Pause Game";
+            this.pauseGameToolStripMenuItem.Click += new System.EventHandler(this.pauseGameToolStripMenuItem_Click);
             // 
             // saveToolStripMenuItem
             // 

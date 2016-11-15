@@ -141,6 +141,17 @@ namespace Homework9 {
             uf.Show();
         }
 
-        
+        private void pauseGameToolStripMenuItem_Click(object sender, EventArgs e) {
+            if (!Game.Paused) {
+                Watcher.Pause();
+                Game.Pause();                
+                pauseGameToolStripMenuItem.Text = "Resume Game";
+            } else if (Game.Paused) {                
+                Game.Resume();
+                Watcher.Resume();
+                pauseGameToolStripMenuItem.Text = "Pause Game";
+            }
+
+        }
     }
 }
