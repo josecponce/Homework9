@@ -77,23 +77,23 @@ namespace Homework9.Domain {
             if (inGame) {
                 //draw fruits
                 foreach (var apple in Apples) {
-                    g.DrawRectangle(new Pen(Color.Red), new Rectangle(apple.X, apple.Y, DOTSIZE, DOTSIZE));
+                    g.DrawRectangle(Pens.Red, new Rectangle(apple.X, apple.Y, DOTSIZE, DOTSIZE));
                 }
 
                 for (int z = 0; z < Snake.Length; z++) {
                     //location of where to draw:
                     rectangleGraphic = new Rectangle(Snake.Location[z].X, Snake.Location[z].Y, DOTSIZE, DOTSIZE);
-                    g.DrawRectangle(new Pen(Color.Black), rectangleGraphic);
+                    g.DrawRectangle(Pens.Black, rectangleGraphic);
                 }
             } else {
-                gameOver(g);
+                gameOver();
             }
         }
 
-        private void gameOver(Graphics g) {
-            MessageBox.Show("Game Over");
+        private void gameOver() {
             MoveTimer.Enabled = false;
             AppleTimer.Enabled = false;
+            MessageBox.Show("Game Over");            
         }
 
         public void addApple() {
@@ -110,18 +110,30 @@ namespace Homework9.Domain {
         public void setDirection(int i) {
             Snake.Direction = (Direction)i;
         }
-
+        private Point lastLocation = Point.Empty;
         public void Move() {
 
             var point = Snake.Location[0];
 
+            if (HitWall()) {
+                gameOver();
+                return;
+            }
+
+            bool hit = false;
+            if (HitApple()) {
+                Point apple = Apples.First((app) => app == Snake.Location[0]);
+                Apples.Remove(apple);
+                hit = true;
+            }
+
             for (int z = Snake.Length - 1; z > 0; z--) {
-                //Snake.location.Add(new Point((z - 1), (z - 1)));
-                //x[z] = x[(z - 1)];
-                //y[z] = y[(z - 1)];
                 Snake.Location[z] = new Point(Snake.Location[z - 1].X, Snake.Location[z - 1].Y);
+            }
 
-
+            if (hit) {//this happens if we ate an apple
+                Snake.Location.Add(lastLocation);
+                Snake.Length++;
             }
 
             if (SnakeDirection == Direction.Left) {
@@ -133,8 +145,18 @@ namespace Homework9.Domain {
             } else if (SnakeDirection == Direction.Down) {
                 Snake.Location[0] = new Point(point.X, point.Y += DOTSIZE);
             }
-
+            lastLocation = Snake.Location.Last();
             GameChanged?.Invoke();
+        }
+
+        private bool HitApple() {
+            return Apples.Any((apple) => apple == Snake.Location[0]);
+        }
+        private bool HitWall() {
+            return Snake.Location[0].X > BoardSize.Width - DOTSIZE 
+                || Snake.Location[0].Y > BoardSize.Height - DOTSIZE
+                || Snake.Location[0].X < 0
+                || Snake.Location[0].Y < 0;
         }
 
         //draws at the start

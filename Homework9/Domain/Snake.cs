@@ -31,7 +31,5 @@ namespace Homework9.Domain
            
             Length = 1;
         }
-
-
     }
 }

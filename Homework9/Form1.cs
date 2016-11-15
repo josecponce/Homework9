@@ -7,6 +7,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -75,7 +76,7 @@ namespace Homework9 {
             }            
         }
         public void Del() {
-            this.Invalidate(true);
+            this.Refresh();
         }
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData) {
             switch (keyData) {
@@ -113,7 +114,9 @@ namespace Homework9 {
 
             Watcher.NewData -= graphGameProgressControl.UpdateGraph;
             Watcher.NewData -= gridGameProgressControl.UpdateGraph;
-            Watcher.Dispose();            
+            Watcher.Dispose();
+
+            Thread.Sleep(1000);//allow for the timers to actually stops
         }
 
         private void pictureBox_DragDrop(object sender, DragEventArgs e) {
