@@ -44,7 +44,7 @@ namespace Homework9.Domain {
         }
 
         private void MoveTimer_Elapsed(object sender, ElapsedEventArgs e) {
-            move();
+            Move();
         }
 
         public bool Paused { get; private set; }
@@ -82,7 +82,7 @@ namespace Homework9.Domain {
 
                 for (int z = 0; z < Snake.Length; z++) {
                     //location of where to draw:
-                    rectangleGraphic = new Rectangle(Snake.location[z].X, Snake.location[z].Y, DOTSIZE, DOTSIZE);
+                    rectangleGraphic = new Rectangle(Snake.Location[z].X, Snake.Location[z].Y, DOTSIZE, DOTSIZE);
                     g.DrawRectangle(new Pen(Color.Black), rectangleGraphic);
                 }
             } else {
@@ -111,27 +111,27 @@ namespace Homework9.Domain {
             Snake.Direction = (Direction)i;
         }
 
-        public void move() {
+        public void Move() {
 
-            var point = Snake.location[0];
+            var point = Snake.Location[0];
 
             for (int z = Snake.Length - 1; z > 0; z--) {
                 //Snake.location.Add(new Point((z - 1), (z - 1)));
                 //x[z] = x[(z - 1)];
                 //y[z] = y[(z - 1)];
-                Snake.location[z] = new Point(Snake.location[z - 1].X, Snake.location[z - 1].Y);
+                Snake.Location[z] = new Point(Snake.Location[z - 1].X, Snake.Location[z - 1].Y);
 
 
             }
 
             if (SnakeDirection == Direction.Left) {
-                Snake.location[0] = new Point(point.X -= DOTSIZE, point.Y);
+                Snake.Location[0] = new Point(point.X -= DOTSIZE, point.Y);
             } else if (SnakeDirection == Direction.Right) {
-                Snake.location[0] = new Point(point.X += DOTSIZE, point.Y);
+                Snake.Location[0] = new Point(point.X += DOTSIZE, point.Y);
             } else if (SnakeDirection == Direction.Up) {
-                Snake.location[0] = new Point(point.X, point.Y -= DOTSIZE);
+                Snake.Location[0] = new Point(point.X, point.Y -= DOTSIZE);
             } else if (SnakeDirection == Direction.Down) {
-                Snake.location[0] = new Point(point.X, point.Y += DOTSIZE);
+                Snake.Location[0] = new Point(point.X, point.Y += DOTSIZE);
             }
 
             GameChanged?.Invoke();
@@ -142,7 +142,7 @@ namespace Homework9.Domain {
             addApple();
             Snake.Length = 3;
             for (int z = 0; z < Snake.Length; z++) {
-                Snake.location.Add(new Point(50 - z * 10, 50));
+                Snake.Location.Add(new Point(50 - z * DOTSIZE, 50));
             }
             MoveTimer.Enabled = true;
             AppleTimer.Enabled = true;

@@ -18,7 +18,7 @@ namespace Homework9.Domain
     public class Snake
     {
         public int Length { get;  set; }
-        public List<Point> location { get;  set; }
+        public List<Point> Location { get;  set; }
         
         public Direction Direction { get; set; }
         private Point Position;
@@ -27,7 +27,7 @@ namespace Homework9.Domain
         {
             Position = startingPosition;
             Direction = startingDirection;
-            location = new List<Point>();
+            Location = new List<Point>();
            
             Length = 1;
         }
